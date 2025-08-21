@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Mood-Based Movie Recommender</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <div class="bg-video-wrap">
+  <video autoplay muted loop playsinline>
+    <source src="{{ url_for('static', filename='Video.mp4') }}" type="video/mp4">
+  </video>
+</div>
+<div class="bg-overlay">
+</div>
+    <div class="card">
+      <center><h1>Pick your mood</h1></center>
+      <form action="/recommend" method="post">
+        <select name="mood" required>
+          <option value="">-- Select mood --</option>
+          {% for m in moods %}
+          <option value="{{m}}">{{m}}</option>
+          {% endfor %}
+        </select>
+        <button type="submit">Get Recommendation</button>
+      </form>
+      
+    </div>
+  </body>
+</html>

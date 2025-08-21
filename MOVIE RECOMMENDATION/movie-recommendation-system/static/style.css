@@ -1,0 +1,120 @@
+/* style.css - place in mood_app/static/ */
+
+/* --- Reset & base --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; width: 100%; font-family: "Segoe UI", Roboto, Arial, sans-serif; }
+
+/* --- Fullscreen video background container --- */
+.bg-video-wrap {
+  position: fixed;
+  inset: 0;               /* top:0; right:0; bottom:0; left:0; */
+  overflow: hidden;
+  z-index: -2;            /* behind everything */
+  background: #000;       /* fallback color */
+}
+
+body { font-family: Arial, sans-serif; display:flex; align-items:center; justify-content:center; height:100vh; background:#666; }
+      .card { background:#666; padding:20px; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.08); width:380px; }
+      h1{ font-size:20px; margin-bottom:10px; }
+      select, button { width:100%; padding:10px; margin-top:10px; border-radius:8px; border:1px solid #666; }
+      .footer { margin-top:12px; font-size:12px; color:#666; }
+/* the <video> itself */
+.bg-video-wrap video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;      /* crop to fill */
+  filter: saturate(1) contrast(1) brightness(0.85);
+  will-change: transform;
+}
+
+/* dark overlay to improve contrast */
+.bg-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.55));
+  z-index: -1;            /* sits above video but behind UI */
+  pointer-events: none;
+}
+
+/* Accessibility: if user prefers reduced motion, hide video and show poster */
+@media (prefers-reduced-motion: reduce) {
+  .bg-video-wrap video { display: none; }
+  .bg-video-wrap { background-size: cover; background-position: center; }
+}
+
+/* --- Centered UI card on top --- */
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  position: relative;
+  z-index: 10; /* front of overlay */
+}
+
+/* card */
+.card{
+  width: 100%;
+  max-width: 420px;
+  background: rgba(49, 47, 47, 0.92);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.25);
+  padding: 22px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: transform .22s cubic-bezier(.2,.9,.3,1), box-shadow .2s;
+}
+
+/* subtle hover lift on devices that support hover */
+@media (hover: hover) {
+  .card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(2,6,23,0.28); }
+}
+
+h1 { font-size: 20px; color: #ebf1f1; margin-bottom: 10px; letter-spacing: -0.2px;  }
+select, button {
+  width: 100%;
+  padding: 12px 14px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(15,23,42,0.08);
+  font-size: 15px;
+  outline: none;
+  background: rgb(85, 82, 82);
+}
+.movie { font-weight:700; margin-top:8px; }
+a.button { display:inline-block; margin-top:16px; padding:10px 16px; border-radius:8px; background:#4f46e5; color:white; text-decoration:none;}
+button {
+  cursor: pointer;
+  background: linear-gradient(90deg,#cdcdcf,#595961);
+  color: rgb(10, 10, 10);
+  border: none;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(79,70,229,0.18);
+}
+
+button:active { transform: translateY(1px); }
+
+/* small footer text */
+.footer { margin-top: 12px; font-size: 12px; color: rgba(15,23,42,0.6); }
+
+/* result page tweaks */
+.result-movie {
+  font-weight: 700;
+  font-size: 18px;
+  margin-top: 8px;
+  color: #111827;
+}
+
+/* responsive adjustments */
+@media (max-width: 480px) {
+  .card { padding: 18px; border-radius: 12px; }
+  h1 { font-size: 18px; }
+  select, button { padding: 11px; font-size: 14px; }
+}

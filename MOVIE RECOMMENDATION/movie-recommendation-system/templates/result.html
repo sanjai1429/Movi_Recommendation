@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Recommendation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <div class="bg-video-wrap">
+      <video autoplay muted loop playsinline>
+    <source src="{{ url_for('static', filename='Video.mp4') }}" type="video/mp4">
+  </video>
+  </div>
+  <div class="bg-overlay"></div>
+    <div class="card" style=" background:white; padding:20px; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.08); width:420px; text-align:center;">
+      <h1 style="color: black;">Recommendation for mood: {{mood}}</h1>
+      <div>Model predicted movie: <div class="movie" >{{movie_pred}}</div></div>
+      <div style="margin-top:8px;">(Also here's a random pick from the mood list: <strong>{{random_choice}}</strong>)</div>
+      <a class="button" href="/">Try another mood</a>
+    </div>
+  </body>
+</html>
